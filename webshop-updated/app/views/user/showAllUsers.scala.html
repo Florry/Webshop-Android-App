@@ -1,0 +1,10 @@
+@(users: List[model.UserModel])
+	@index("all users") {
+		<h4>All users:</h4>
+		<h4>
+			@for( user <- users ){
+				<a href="@routes.User.editUserForm(user.getEmail())"><span style="float: left;" class="glyphicon glyphicon-edit"><i></i>&nbsp;&nbsp;</span></a><span style="float: left;"><a href="@routes.User.showUser(user.getEmail())">@user.getEmail()</a> </span><span style="float:right;">@if(user.getRights > 0){Admin}else{Customer}</span> 
+				<hr />
+			}
+		</h4>
+	}

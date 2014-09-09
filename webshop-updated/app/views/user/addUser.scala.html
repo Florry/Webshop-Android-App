@@ -1,0 +1,42 @@
+@()
+	@index("Add User") {
+		<center>
+			<h3>Register User</h3>
+			@if(flash.containsKey("email-null")){
+				<div class="alert alert-warning"><small>Invalid user details</small></div>
+			}
+			<div class="formblock" style="width:50%; text-align: left;">
+				<br/>
+				<form role="form" action ="@routes.User.addUser()" method="POST">
+					<div class="form-group">
+						<input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+						<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name">
+						<input type="text" class="form-control" id="last" name="lastname" placeholder="Last name">
+					</div>
+					<div class="form-group">
+						<input type="date" class="form-control" id="dob" name="dob" placeholder="date of birth" style="top: 20px; width: 50%; float: left;">
+						<input type="text" class="form-control" id="telephone" name="telephone" placeholder="telephone number" style="width: 50%; float: right;">
+					</div>
+					<label></label>
+					<label></label>
+					<div class="form-group">
+						<input type="text" class="form-control" id="address1" name="address1" placeholder="address" style="width: 50%; float: left;">
+						<input type="text" class="form-control" id="address2" name="address2" placeholder="address #2" style="top: 20px; width: 50%; float: right;">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="postcode" name="postcode" placeholder="postcode" style="width: 50%; float: left;">
+						<input type="text" class="form-control" id="town" name="town" placeholder="town" style="top: 20px; width: 50%; float: right;">
+					</div>
+					<select name="rights" style="width:100%; height: 100px;">
+						<option value="0">Customer</option>
+						<option value="1">Admin</option>
+					</select>
+					<button type="submit" class="btn btn-default">Add</button>
+				</form>
+				</small>
+			</div>
+		</center>
+	}

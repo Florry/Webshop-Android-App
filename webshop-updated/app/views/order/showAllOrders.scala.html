@@ -1,0 +1,13 @@
+@(orders: List[model.OrderModel])
+	@index("Orders") {
+		<h1>All orders</h1>
+		<h4> 
+			@for( order <- orders ){
+				<small>
+					<a href="@routes.Order.showContents(order.getId())">#@order.getId(). @order.getDate()</a> - 
+					<a href="@routes.User.showUser(order.getUser())"> @order.getUser()</a>
+				 </small>
+				<br />
+			}
+		</h4>
+	}

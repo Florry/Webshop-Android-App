@@ -1,0 +1,33 @@
+@(categories: List[model.CategoryModel])
+	@index("Add Category") {
+		<center>
+			<h3>Edit product categories</h3>
+			<div class="formblock" style="width:50%; text-align: left;">
+				<small>
+					Available categories:<br/>
+					<b>
+						@for(category <- categories){
+							<form method="POST" style="display:inline;" action="@routes.Category.deleteCategory()">
+								<input type="hidden" name="id" value="@category.getId()"></input>
+								<a href="@routes.Category.showCategoryById(category.getId())">@category.getName()</a>
+								<button type="submit" style="float:right; border:0px; background-color: transparent; padding: 0px;">
+									<span class="glyphicon glyphicon-trash">
+										<i></i>
+									</span>
+								</button>
+								<br/>
+							</form>
+						}
+					</b>
+					<br/>
+					<form role="form" action ="@routes.Category.addCategory()" method="POST">
+						<div class="form-group">
+							<label for="name">Name</label>
+							<input type="text" class="form-control" id="name" name="name" placeholder="Enter category name">
+						</div>
+						<button type="submit" class="btn btn-default">Add</button>
+					</form>
+				</small>
+			</div>
+		</center>
+	}

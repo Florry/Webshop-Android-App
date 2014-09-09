@@ -1,0 +1,24 @@
+@(message: String)
+	@index("Admin") {
+		<h3>Products</h3>
+		<small>
+			<a href="@routes.Product.addProductForm()">Add Product</a><br/>
+			<a href="@routes.Product.deleteProductform()">Delete Product</a><br/>
+			<a href="@routes.Product.showAllProducts()">Show all Products</a><br/>
+			<a href="@routes.Product.showLowStock(10)">Products low on stock</a><br/>
+		</small>
+		<h3>Categories</h3>
+		<small>
+			<a href="@routes.Category.addCategoryForm()">Edit Categories</a><br/>
+		</small>
+		<h3>Users</h3>
+		<small>
+			<a href="@routes.User.addUserForm()">Add User</a><br/>
+			<a href="@routes.User.deleteUserForm()">Delete User</a><br/>
+			<a href="@routes.User.showAllUsers()">Show all Users</a><br/>
+		</small>
+		<h3>Orders</h3>
+		<small>
+			<a href="@routes.Order.showAllOrders()">Show all Orders</a><br/>
+		</small>
+	}

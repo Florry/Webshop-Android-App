@@ -1,0 +1,47 @@
+@(order: model.OrderModel)(user: model.UserModel)
+	@index("Order") {
+		@if(order != null && (controllers.Login.decodeEmail(session().get("username")) == user.getEmail() || Integer.parseInt(controllers.Login.decodeEmail(session().get("rights"))) > 0)){
+			@if(session().get("rights") != null && Integer.parseInt(controllers.Login.decodeEmail(session().get("rights"))) > 0){
+				<h4>
+				Order #@order.getId() <br/>by 
+				<a href="@routes.User.showUser(order.getUser())">@order.getUser()</a>
+			}else{
+				<h4>Order <br/>by 
+				<a href="@routes.User.showProfile()">@order.getUser()</a>			
+			}
+			<br/> @user.getFirstname() @user.getLastname() 
+			</h4>
+			<h5>at @order.getDate()</h5>
+			<hr/>
+			<div class="row">
+				<b>
+					<div class="col-xs-6 col-sm-3">Title</div>
+					<div class="col-xs-6 col-sm-3">Quantity</div>
+					<div class="clearfix visible-xs"></div>
+					<div class="col-xs-6 col-sm-2">Price</div>
+					<div class="col-xs-6 col-sm-3">Sum</div>
+				</b>
+			</div>
+			@for( product <- order.getContents() ) {
+				<div class="row">
+						<div class="col-xs-6 col-sm-3"> <a href="@routes.Product.showProductById(product.getProduct().getId())">@product.getProduct().getName()</a></div>
+						<div class="col-xs-6 col-sm-3">@product.getQuantity().getQuantity()</div>
+						<div class="clearfix visible-xs"></div>
+						<div class="col-xs-6 col-sm-2">@product.getProduct().getCost().toInt $</div>
+						<div class="col-xs-6 col-sm-3">@(product.getProduct().getCost().toInt * product.getQuantity().getQuantity().toInt)$ </div>
+				</div>
+				<br/>
+			}
+			<br/>
+			<div class="row">
+				<b>
+					<div class="col-xs-6 col-sm-3" style="float:right;">Total price</div>
+				</b>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-3" style="float:right;">@order.getTotalPrice().toInt $</div>
+			</div>
+		}else{
+			order not found!
+		}
+	}

@@ -1,0 +1,90 @@
+@* shoppingCart Template File *@
+@(user: model.UserModel, products: List[model.ProductModel])
+@import java.lang.String; var name = "";
+	@if(user != null){
+		@{name = user.getEmail()}
+	}else{
+		@{name = "Usr not found!"}
+	}
+	@index("Shoppingcart " + name) {
+		@if(user != null){
+			@user.getFirstname @user.getLastname<br/>
+			<h4>Shopping cart</h4>
+			@if(flash.containsKey("cart-empty")){
+				<div class="alert alert-warning"><small>Cannot place order with empty shopping cart!</small></div>
+			}
+			<hr/>
+			<div class="row">
+				<b>
+					<div class="col-xs-6 col-sm-3">Title</div>
+					<div class="col-xs-6 col-sm-3">Quantity</div>
+					<div class="clearfix visible-xs"></div>
+					<div class="col-xs-6 col-sm-2">Price</div>
+					<div class="col-xs-6 col-sm-3">Sum</div>
+				</b>
+			</div>
+			@if(user.getShoppingCartContents().size() > 0){
+				@for(product <- user.getShoppingCartContents()) {
+					<div class="row">
+						<div class="col-xs-6 col-sm-3"><a href="@routes.Product.showProductById(product.getProduct().getId())">@product.getProduct().getName()</a></div>
+						<div class="col-xs-6 col-sm-3">
+							<form method="POST" action="@routes.User.removeQuantity(user.getEmail())" style="display: inline;">
+								<input type="hidden" name="id" value="@product.getProduct().getId()"></input>		  
+								<button type="submit" style=" display: inline; border:0px; background-color: transparent; padding: 0px;"><span class="glyphicon glyphicon-minus"><i></i></span></button>  
+							</form>
+							@product.getQuantity().getQuantity() 
+							<form method="POST" action="@routes.User.addQuantity(user.getEmail())" style="display: inline;">
+								<input type="hidden" name="id" value="@product.getProduct().getId()"></input>		 
+								<button type="submit" style=" display: inline; border:0px; background-color: transparent; padding: 0px;"><span class="glyphicon glyphicon-plus"><i></i></span></button>
+							</form>
+						</div>
+						<div class="clearfix visible-xs"></div>
+						<div class="col-xs-6 col-sm-2">@product.getProduct().getCost().toInt $</div>
+						<div class="col-xs-6 col-sm-3">@(product.getProduct().getCost().toInt * product.getQuantity().getQuantity().toInt) $</div>
+						<div class="col-md-1">
+						<form method="POST" action="@routes.User.removeProductFromCart(user.getEmail())">
+							<input type="hidden" name="id" value="@product.getProduct().getId()"></input>
+							<button type="submit" style="float: right; border:0px; background-color: transparent; padding: 0px;">
+								<span class="glyphicon glyphicon-trash">
+									<i></i>
+								</span>
+							</button>
+						</div>
+						</form>
+					</div>
+					}
+			}else{
+				<br/>
+				Shopping cart is empty!
+			}
+			<br/>
+			<div class="row">
+				<b>
+					<div class="col-xs-6 col-sm-3" style="float:right;">Total price</div>
+				</b>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-3" style="float:right;">@user.getTotalShoppingCartPrice().toInt $</div>
+			</div>
+			@if(session().get("rights") != null && Integer.parseInt(controllers.Login.decodeEmail(session().get("rights"))) > 0){
+				<h4>Add products to cart:</h4>
+				<form role="form" action ="@routes.User.addProductToCartByEmail(user.getEmail())" method="POST">
+					<select name="product">
+						@for(product <- products){
+							<option value="@product.getId()">@product.getName()</option>
+						}
+					</select>
+					<input type="number" name="quantity" placeholder="quantity"></input>
+					<br/>
+					<br/>
+					<button type="submit" class="btn btn-default">add to cart</button>
+				</form>
+			}
+			<br/>
+			@if(user.getShoppingCartContents().size() > 0){
+				<form role="form" action ="@routes.Order.placeOrder(user.getEmail())" method="POST" style="float:right;">
+					<button type="submit" class="btn btn-default">Place order</button>
+				</form>
+			}
+		}
+	}

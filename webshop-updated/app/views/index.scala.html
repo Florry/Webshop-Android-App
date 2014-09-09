@@ -1,0 +1,119 @@
+@(title: String)(content: Html)
+	@import java.lang.Integer; var rights = 0; 
+	@import java.lang.String; var userEmail = "";
+	@if(session.get("username") != null){
+		@{userEmail = controllers.Login.decodeEmail(session.get("username"))}
+	}
+	@if(session().get("rights") != null){
+		@{rights = Integer.parseInt(controllers.Login.decodeEmail(session().get("rights")))}
+	}
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+			<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+			<link rel="stylesheet" href="@routes.Assets.at("main.min.css")">
+			<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+			@if(content != null){
+				<title>Webshop - @title</title>
+			}else{
+				<title>Webshop - Welcome!</title>
+			}
+		</head> 
+		<body>
+			<div class="container">
+				@if(flash.containsKey("not-logged-in")){
+					<div class="alert alert-warning"><small>You need to be logged in to access that page!</small></div>
+				}
+				<h2><a href="@routes.Application.home()">Offline webshop!</a> <small>for all your offline webshopping needs</small></h2>
+				<div class="menu">
+					<small>
+						@if(session.get("username") != null){
+							<a href="@routes.Login.logoutUser()">Logout</a>	<br/>
+							<b>Logged in as:</b>					
+								<br/><small><b><a href="@routes.User.showProfile()">@userEmail</a><br/></b></small>
+								<big><a href="@routes.User.showShoppingCart()">Shoppingcart</a></br></big>
+								<br/>
+						}else{
+							<form role="form" action="@routes.Login.loginUser()" method="POST" >
+								<fieldset>
+									<legend class="login">Login</legend>
+									<a href="@routes.User.registerUserForm()">Register here</a><br/><br/>
+									<label>Email</label><br/>
+										<span  class="loginInput"><input type="text" name="email" value="" placeholder="example@@example.com">
+										</span>
+										<br/>
+									<label>Password</label><br/>
+										<span  class="loginInput" ><input type="password" name="password" value="" class="loginInput" 
+										placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+										</span>
+									<br/>
+									<br/>
+									<button type="submit" class="btn loginButton">Login</button><br/><br/>
+								</fieldset>
+							</form>
+							
+							@if(flash.containsKey("username-empty")){
+								<div class="alert alert-warning"><small>Username required.</small></div>
+							}
+							@if(flash.containsKey("password-empty")){
+								<div class="alert alert-warning"><small>Password required.</small></div>
+							}
+							@if(flash.containsKey("no-username-password-match")){
+								<div class="alert alert-warning"><small>Entered username or <br/>password was wrong.</small></div>
+							}
+						}
+						<a href="@routes.Application.home()">Home</a><br/>
+						@if(rights > 0){
+							<a href="@routes.Application.edit()">Admin</a><br/><br/>
+						}
+						<a href="@routes.Product.showAllProducts()">Show all products</a></br>
+						<a href="@routes.Category.showAllCategories()">Products by category</a>
+						<br>
+					</small>
+				</div>
+				<div class="contentBox">
+					<div class="innerContent">
+						@if(content != null){
+							@content
+						}else{
+							<div style="padding-top: 60px">
+									<div class="row featurette">
+								        <div class="col-md-7">
+								          <h2 class="featurette-heading">Felis featurette euismod. <span class="text-muted">Ito ll porta cursus semper.</span></h2>
+								          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+								        </div>
+								        <div class="col-md-5">
+								          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="500x500" src="http://farm4.static.flickr.com/3352/4632385742_7529f762d1_m.jpg">
+								        </div>
+								      </div>
+								<hr class="featurette-divider">
+									<div class="row featurette">
+										<div class="col-md-5">
+											<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="500x500" src="http://media.metalhammer.co.uk/wp-content/uploads/2013/07/new-avenged-sevenfold-art.jpg">
+										</div>
+										<div class="col-md-7">
+											<h2 class="featurette-heading">On nulla, nis vel fusce. <span class="text-muted">Vee for praesent.</span></h2>
+											<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+										</div>
+									</div>
+								<hr class="featurette-divider">
+									<div class="row featurette">
+								        <div class="col-md-7">
+								          <h2 class="featurette-heading">Felis featurette euismod. <span class="text-muted">Ito ll porta cursus semper.</span></h2>
+								          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+								        </div>
+								        <div class="col-md-5">
+								          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="500x500" src="http://spydistrict.com/wp-content/uploads/2012/10/tumblr_mb64ok2ha81rc7r9zo1_r3_1349018903_cover.jpg">
+								        </div>
+								      </div>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+			</div>
+		</body>
+	</html>

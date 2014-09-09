@@ -1,0 +1,18 @@
+@(users: List[model.UserModel])
+	@index("Delete user") {
+		<h3>Delete a user</h3>
+		@if(flash.containsKey("delete-yourself")){
+			<div class="alert alert-warning"><small>Cannot delete yourself!</small></div>
+		}
+		@if(flash.containsKey("user-deleted")){
+			<div class="alert alert-warning"><small>@flash.get("user-deleted") was deleted!</small></div>
+		}
+		@for( user <- users ){
+			<a href="@routes.User.showUser(user.getEmail())"><button class="btn btn-deault">@user.getEmail()</button></a>
+			<form method="POST" style="display:inline;" action="@routes.User.deleteUser()">
+				<input type="hidden" name="email" value="@user.getEmail()"></input>
+				<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Delete</button> 
+			</form>
+			<br/><br/>
+		}
+	}

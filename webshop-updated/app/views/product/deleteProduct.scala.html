@@ -1,0 +1,20 @@
+@(products: List[model.ProductModel])
+	@index("Delete product") {
+		<h3>Delete a product</h3>
+		@for( product <- products ){
+			@if(product.isInStore() == true){
+				<a href="@routes.Product.showProductById(product.getId())">
+					<button class="btn btn-deault">@product.getName()</button>
+				</a>
+				<form method="POST" style="display:inline;" action="@routes.Product.deleteProduct()">
+					<input type="hidden" name="id" value="@product.getId()"></input>
+					<button type="submit" class="btn btn-danger">
+						<i class="glyphicon glyphicon-trash"></i> 
+						Delete
+					</button> 
+				</form>
+				<br/>
+				<br/>
+			}
+		}
+	}

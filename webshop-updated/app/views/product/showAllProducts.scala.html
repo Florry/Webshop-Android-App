@@ -1,0 +1,50 @@
+@(products: List[model.ProductModel])
+	@index("Products") {
+		<h1 class="">Products</h1>
+		<h4>
+			<hr/>
+			@for( product <- products ){
+				@if(product.isInStore() == true){
+					@if(session().get("rights") != null && Integer.parseInt(controllers.Login.decodeEmail(session().get("rights"))) > 0){
+						<a href="@routes.Product.editProductForm(product.getId())">
+						<span style="float: left;" class="glyphicon glyphicon-edit">
+						<i></i>
+						</span>
+						</a>&nbsp;&nbsp;	
+					}
+					<span class="shortDescription">
+						<a href="@routes.Product.showProductById(product.getId())"><img src="@product.getImgUrl()" class="img-circle productImgSmall"/>&nbsp;&nbsp;
+						@product.getName()</a>
+						<small>
+							- @product.getDescription()
+						</small>
+					</span>
+					@if(session().get("username") != null){
+						@if(product.getStock > 0){
+							<form style="display:inline;" role="form" action ="@routes.User.addProductToCart()" method="POST">
+								<input type="hidden" name="product" value="@product.getId()"></input>
+								<input type="hidden" style="width: 100px"type="number" name="quantity" value="1"></input>
+								<button type="submit" class="btn btn-deault" style="float:right; border:0px; background-color: transparent; padding: 0px;">
+								<span style="float: left;" class="glyphicon glyphicon-shopping-cart"></span>
+								<i></i>
+								</button>
+							</form>
+						}else{
+							<form style="display:inline;" role="form" action ="@routes.Product.showProductById(product.getId())">
+								<button type="submit" class="btn btn-deault" style="float:right; border:0px; background-color: transparent; padding: 0px;">
+								<span style="float: left; color:lightgrey;" class="glyphicon glyphicon-shopping-cart"></span>
+								<i></i>
+								</button>
+							</form>
+						}
+					}
+					@if(product.getStock > 0){
+						<span style="float:right;">@product.getCost().toInt $&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					}else{
+						<span style="float:right; color:lightgrey;">@product.getCost().toInt $&nbsp;&nbsp;&nbsp;&nbsp;</span>					
+					}
+					<hr />
+				}
+			}
+		</h4>
+	}

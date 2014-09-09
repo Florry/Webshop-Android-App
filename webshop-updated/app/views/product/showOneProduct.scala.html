@@ -1,0 +1,61 @@
+@(product: model.ProductModel)
+@import java.lang.String; var name = "";
+	@if(product != null){
+		@{name = product.getName()}
+	}else{
+		@{name = "product not found!"}
+	}
+@index("Product - " + name) {
+	@if(product != null){
+		<h1> @product.getName() 
+		@if(session().get("rights") != null && Integer.parseInt(controllers.Login.decodeEmail(session().get("rights"))) > 0){
+			<small>:@product.getId()</small>
+		}
+		</h1>
+				
+		<img src="@product.getImgUrl()" class="img-circle productImgBig" style="float: right;"/>
+		<h4>Price: @product.getCost().toInt $</h4>
+		<small>@product.getDescription()</small>
+		@if(product.isInStore() == true){
+			@if(product.getStock() > 0){
+				<h5>@product.getStock() @product.getName()s in stock</h5>
+				@if(session().get("username") != null){
+					<form style="display:inline;" role="form" action ="@routes.User.addProductToCart()" method="POST">
+						<input type="hidden" name="product" value="@product.getId()"></input><br/><br/>
+						<input style="width: 100px"type="number" name="quantity" placeholder="quantity"></input>
+						<button type="submit" class="btn btn-deault" style=" border:0px; background-color: transparent; padding: 0px;">
+						<span style="float: left;" class="glyphicon glyphicon-shopping-cart">
+						<i></i>
+						</button>
+					</form>
+				}
+				<br/>
+				<br/>
+			}else{
+				<h4>Out of stock!</h4>
+			}
+		}else{
+			<h4>This product is no longer in store!</h4>
+		}
+		Categories:
+		<ul>
+		@for( category <- product.getCategories() ){
+			<li><a href="@routes.Category.showCategoryById(category.getId())"> @category.getName()</a></li>
+		}
+		</ul>
+		@if(session().get("rights") != null && Integer.parseInt(controllers.Login.decodeEmail(session().get("rights"))) > 0){
+			<br/>
+			<br/>
+			<form method="POST" style="display:inline;" action="@routes.Product.deleteProduct()">
+				<input type="hidden" name="id" value="@product.getId()"></input>
+				<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</button> 
+			</form>
+		}
+			</br>
+			<small>
+			</small>
+			</br>
+		}else{
+			product not found!
+		}
+	}

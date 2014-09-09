@@ -1,0 +1,23 @@
+@(products: List[model.ProductModel])
+	@index("Products low on stock") {
+		<h1>Products low on stock:</h1>
+		<h4> 
+			@for( product <- products ){
+				<a href="@routes.Product.showProductById(product.getId())">@product.getName()</a><br/>		
+			}
+			<br/>
+			<br/>
+			<small>Show products with stock lower than:</small><br/>
+			<a href="100">100</a>, 
+			<a href="50">50</a>, 
+			<a href="25">25</a>, 
+			<a href="15">15</a>, 
+			<a href="10">10</a>, 
+			<a href="5">5</a>, 
+			<a href="4">4</a>, 
+			<a href="3">3</a>, 
+			<a href="2">2</a>, 
+			<a href="1">1</a>
+			</form>
+		</h4>
+	}

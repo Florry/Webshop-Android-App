@@ -1,0 +1,12 @@
+@(categories: List[model.CategoryModel])
+	@index("Categories") {
+		<h1>Products by category</h1>
+		<h4> 
+		<hr/>
+			@for( category <- categories ){
+				<img src="http://placehold.it/60x60&text=Category" class="img-circle"/>&nbsp;&nbsp;
+				<a href="@routes.Category.showCategoryById(category.getId())">@category.getName()</a>
+				<hr/>
+			}
+		</h4>
+	}
