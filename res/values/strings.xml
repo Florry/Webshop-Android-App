@@ -1,0 +1,70 @@
+<resources>
+
+    <string name="app_name">Web Shop</string>
+
+    <!-- titles -->
+    <string name="category_create_title">Create category</string>
+    <string name="category_all_title">All categories</string>
+    <string name="login_title">Login</string>
+    <string name="order_all_title">All orders</string>
+    <string name="product_create_title">Create product</string>
+    <string name="product_all_title">All products</string>
+    <string name="shoppingcart_title">Shopping cart</string>
+
+    <!-- Product -->
+    <string name="product_name">\nProduct Name</string>
+    <string name="product_description">Product Description</string>
+    <string name="product_categories">Product Categories</string>
+    <string name="product_cost">Product Cost</string>
+    <string name="product_rrp">Product RRP</string>
+    <string name="product_stock">Product Stock</string>
+    <string name="product_create_button">Create Product</string>
+    <string name="product_create_name_required">Name is required!</string>
+    <string name="product_create_description_required">Description is required!</string>
+    <string name="product_create_cost_required">Cost is required!</string>
+    <string name="product_categories_title">\nProduct Categories</string>
+    <string name="product_list_categories">Categories</string>
+
+    <!-- Category -->
+    <string name="category_name">\nCategory Name</string>
+    <string name="category_create_button">Create Category</string>
+    <string name="category_create_name_required">Category name is required!</string>
+
+    <!-- Menu -->
+    <string name="menu_login">Login</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_list_products">List all Products</string>
+    <string name="menu_create_product">Create Product</string>
+    <string name="menu_create_category">Create Category</string>
+    <string name="menu_list_categories">List all Categories</string>
+    <string name="welcome_text">Welcome to this appAratus!</string>
+
+    <!-- Login -->
+    <string name="login_password">Password</string>
+    <string name="login_username">Email</string>
+    <string name="login_do_login">login</string>
+    <string name="login_password_required">Password is required!</string>
+    <string name="login_email_required">Email is required!</string>
+
+    <!-- List -->
+    <string name="image">image</string>
+    <string name="loading">Loading</string>
+    <string name="edit">edit</string>
+    <string name="product_image">Product Image</string>
+    <string name="image_url">image url</string>
+    <string name="menu_shopping_cart">Shopping Cart</string>
+    <string name="menu_list_all_orders">List all orders</string>
+
+    <!-- Shopping cart -->
+    <string name="shoppingcart_place_order">Place order</string>
+    <string name="shoppingcart_no_products">There are no products in your shoppingcart</string>
+    <string name="buy">Add to cart</string>
+    <string name="remove">remove</string>
+
+    <!-- Misc -->
+    <string name="was_created">was created!</string>
+    <string name="could_not_be_created">could not be created!</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+
+</resources>

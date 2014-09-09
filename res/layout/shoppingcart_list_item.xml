@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/shoppingcart_list_item_thumbnail"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:contentDescription="@string/product_image"
+        android:src="@drawable/icon" />
+
+    <TextView
+        android:id="@+id/shoppingcart_list_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/shoppingcart_list_item_thumbnail"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/shoppingcart_list_item_cost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shoppingcart_list_item_name"
+        android:layout_toRightOf="@id/shoppingcart_list_item_thumbnail" />
+
+    <TextView
+        android:id="@+id/shoppingcart_list_item_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shoppingcart_list_item_cost"
+        android:layout_toRightOf="@id/shoppingcart_list_item_thumbnail" />
+
+    <Button
+        android:id="@+id/shoppingcart_list_remove_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/remove"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/shoppingcart_list_remove_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shoppingcart_list_item_thumbnail"
+        android:text="@string/minus"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/shoppingcart_list_add_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shoppingcart_list_item_thumbnail"
+        android:layout_toRightOf="@id/shoppingcart_list_remove_quantity"
+        android:text="@string/plus"
+        android:textSize="12sp" />
+
+</RelativeLayout>

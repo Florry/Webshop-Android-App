@@ -1,0 +1,49 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.omgz.webshop"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity android:name="com.omgz.webshop.Start" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.omgz.webshop.Login" >
+        </activity>
+        <activity android:name="com.omgz.webshop.Logout" >
+        </activity>
+        <activity android:name="com.omgz.webshop.Shoppingcart" >
+        </activity>
+        <activity android:name="com.omgz.webshop.OrderListAll" >
+        </activity>
+        <activity android:name="com.omgz.webshop.CategoryCreate" >
+        </activity>
+        <activity android:name="com.omgz.webshop.CategoryListAll" >
+        </activity>
+        <activity android:name="com.omgz.webshop.ProductCreate" >
+        </activity>
+        <activity android:name="com.omgz.webshop.ProductListAll" >
+        </activity>
+
+        <service android:name="com.omgz.webshop.OrderNotificationService" >
+        </service>
+    </application>
+
+</manifest>
