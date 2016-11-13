@@ -1,3 +1,5 @@
+**Note: This code is several years old.**
+
 Webshop-Android-App
 ===================
 
